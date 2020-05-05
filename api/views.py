@@ -216,8 +216,8 @@ class IngredienteViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_404_NOT_FOUND
             )
 
-        burguers = ingredient.burguer_set.all()
-        if not burguers:
+        burguers = IngredienteEnHamburguesa.objects.all()
+        if ingredient not in burguers:
             ingredient.delete()
             return Response(
                 {"code": "200", "descripcion": 'ingrediente eliminado'},
