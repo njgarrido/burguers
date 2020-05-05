@@ -93,13 +93,13 @@ class HamburguesaViewSet(viewsets.ModelViewSet):
             burguer = Hamburguesa.objects.get(id=pk)
         except:
             return Response(
-                {"code": "201", "descripcion": 'hamburguesa creada'},
-                status=status.HTTP_201_CREATED
+                {"code": "404", "descripcion": 'hamburguesa inexistente'},
+                status=status.HTTP_404_NOT_FOUND
             )
         burguer.delete()
         return Response(
-            {"code": "404", "descripcion": 'hamburguesa inexistente'},
-            status=status.HTTP_404_NOT_FOUND
+            {"code": "200", "descripcion": 'hamburguesa eliminada'},
+            status=status.HTTP_200_OK
         )
 
     @action(detail=True, methods=['put', 'delete'], url_path='ingrediente/(?P<pk2>[^/.]+)')
