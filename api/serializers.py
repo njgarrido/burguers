@@ -14,7 +14,7 @@ class IngredientePathSerializer(serializers.ModelSerializer):
         model = Ingrediente
         fields = ['path']
     def get_path(self, ingrediente):
-        return 'https://burguersnj.herokuapp.com/ingrediente/<int:ingrediente.id>'
+        return 'https://burguersnj.herokuapp.com/ingrediente/{}'.format(ingrediente.id)
 
 class HamburguesaSerializer(serializers.ModelSerializer):
     ingredientes = IngredientePathSerializer(read_only=True, many=True)
