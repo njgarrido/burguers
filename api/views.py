@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from .serializers import HamburguesaSerializer, IngredienteSerializer
-from .models import Hamburguesa, Ingrediente
+from .models import Hamburguesa, Ingrediente, IngredienteEnHamburguesa
 
 
 class HamburguesaViewSet(viewsets.ModelViewSet):
@@ -220,8 +220,18 @@ class IngredienteViewSet(viewsets.ModelViewSet):
                 {"code": "404", "descripcion": 'ingrediente inexistente'},
                 status=status.HTTP_404_NOT_FOUND
             )
+
+
+        ihs = IngredienteEnHamburguesa.objects.all()
+        incluido = False
+
+        for ih in ihs:
+            string = ih.path.split('/')
+            if str(pk) == string[-1]:
+                incluido = True
+
         burguers = ingredient.hamburguesa_set.all()
-        if not burguers:
+        if not incluido:
             ingredient.delete()
             return Response(
                 {"code": "200", "descripcion": 'ingrediente eliminado'},
