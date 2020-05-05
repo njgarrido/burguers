@@ -31,7 +31,7 @@ class HamburguesaViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                {"code": "201", "descripcion": 'operacion exitosa'},
+                serializer.data,
                 status=status.HTTP_201_CREATED
             )
         else:
@@ -164,7 +164,7 @@ class IngredienteViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                {"code": "201", "descripcion": 'Ingrediente Creado'},
+                serializer.data,
                 status=status.HTTP_201_CREATED
             )
         else:
