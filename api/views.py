@@ -123,15 +123,18 @@ class HamburguesaViewSet(viewsets.ModelViewSet):
                     {"code": "404", "descripcion": 'ingrediente inexistente'},
                     status=status.HTTP_404_NOT_FOUND
                 )
-            burguer.ingredientes.add(ingredient)
+            path = 'https://hamburgueseria.com/ingrediente/' + str(pk2)
+            x = IngredienteEnHamburguesa.objects.create(path = path)
+            burguer.ingredientes.add(x)
             return Response(
                 {"code": "201", "descripcion": 'ingrediente agregado'},
                 status=status.HTTP_404_NOT_FOUND
             )
         if request.method == 'DELETE':
             try:
-                ingredient = Ingrediente.objects.get(id=pk2)
-                burguer.ingredientes.remove(ingredient)
+                path = 'https://hamburgueseria.com/ingrediente/' + str(pk2)
+                x = IngredienteEnHamburguesa.objects.get(path = path)
+                burguer.ingredientes.remove(x)
             except:
                 return Response(
                     {"code": "404", "descripcion": 'Ingrediente inexistente en la hamburguesa'},
