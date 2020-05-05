@@ -216,16 +216,8 @@ class IngredienteViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_404_NOT_FOUND
             )
 
-
-        ihs = IngredienteEnHamburguesa.objects.all()
-        incluido = False
-
-        for ih in ihs:
-            string = ih.path.split('/')
-            if str(pk) == string[-1]:
-                incluido = True
-
-        if not incluido:
+        burguers = ingredient.burguer_set.all()
+        if not burguers:
             ingredient.delete()
             return Response(
                 {"code": "200", "descripcion": 'ingrediente eliminado'},
@@ -233,6 +225,8 @@ class IngredienteViewSet(viewsets.ModelViewSet):
             )
         else:
             return Response(
-                {"code": "409", "descripcion": 'Ingredientee no se puede borrar, se encuentra presente en una hamburguesa'},
+                {"code": "409", "descripcion": 'Ingrediente no se puede borrar, se encuentra presente en una hamburguesa'},
                 status=status.HTTP_409_CONFLICT
             )
+
+  
