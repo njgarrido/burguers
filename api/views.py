@@ -124,7 +124,7 @@ class HamburguesaViewSet(viewsets.ModelViewSet):
             burguer.ingredientes.add(x)
             return Response(
                 {"code": "201", "descripcion": 'ingrediente agregado'},
-                status=status.HTTP_404_NOT_FOUND
+                status=status.HTTP_201_CREATED
             )
         if request.method == 'DELETE':
             try:
