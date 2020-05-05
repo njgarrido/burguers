@@ -79,7 +79,7 @@ class HamburguesaViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                {"code": "200", "descripcion": 'operacion exitosa'},
+                serializer.data,
                 status=status.HTTP_200_OK
             )
         else:
