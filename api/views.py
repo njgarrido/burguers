@@ -26,11 +26,7 @@ class HamburguesaViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def create(self, request):
-        if not 'id' in request.data:
-            return Response(
-                {"code": "400", "descripcion": 'Input Invalido'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+
         serializer = HamburguesaSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -164,12 +160,6 @@ class IngredienteViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def create(self, request):
-        if not 'id' in request.data:
-            return Response(
-                {"code": "400", "descripcion": 'Input Invalido'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-
         serializer = IngredienteSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
