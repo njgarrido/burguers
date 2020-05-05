@@ -13,6 +13,8 @@ class IngredientePathSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ingrediente
         fields = ['path']
+    def get_queryset(self):
+        return Ingrediente.objects.all()
     def get_path(self, ingrediente):
         return 'https://burguersnj.herokuapp.com/ingrediente/{}'.format(ingrediente.id)
 
