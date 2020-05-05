@@ -226,7 +226,6 @@ class IngredienteViewSet(viewsets.ModelViewSet):
             if str(pk) == string[-1]:
                 incluido = True
 
-        burguers = ingredient.hamburguesa_set.all()
         if not incluido:
             ingredient.delete()
             return Response(
