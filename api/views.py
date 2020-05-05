@@ -27,7 +27,6 @@ class HamburguesaViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create(self, request):
-
         serializer = HamburguesaSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
