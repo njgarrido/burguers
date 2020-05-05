@@ -14,16 +14,17 @@ class HamburguesaViewSet(viewsets.ModelViewSet):
     # lookup_url_kwarg = "asd"
 
     def retrieve(self, request, pk=None):
-        if not isinstance(pk, int):
+        try:
+            aux = int(pk)
+        except:
             return Response(
                 {"code": "400", "descripcion": 'id invalido'},
                 status=status.HTTP_400_BAD_REQUEST
             )
-
         queryset = Hamburguesa.objects.all()
         hamburguesa = get_object_or_404(queryset, pk=pk)
         serializer = HamburguesaSerializer(hamburguesa)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create(self, request):
 
@@ -148,16 +149,18 @@ class IngredienteViewSet(viewsets.ModelViewSet):
     serializer_class = IngredienteSerializer
 
     def retrieve(self, request, pk=None):
-        if not isinstance(pk, int):
+
+        try:
+            aux = int(pk)
+        except:
             return Response(
                 {"code": "400", "descripcion": 'id invalido'},
                 status=status.HTTP_400_BAD_REQUEST
             )
-
         queryset = Ingrediente.objects.all()
         ingrediente = get_object_or_404(queryset, pk=pk)
         serializer = IngredienteSerializer(ingrediente)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create(self, request):
         serializer = IngredienteSerializer(data=request.data)
